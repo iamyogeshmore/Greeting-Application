@@ -1,20 +1,28 @@
 package com.greetingapplication.controller;
 
+import com.greetingapplication.model.Greeting;
+import com.greetingapplication.service.GreetingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class GreetingController {
+    @Autowired
+    GreetingService greetingService;
     public static final String template = " Welcome to the greeting app.";
+    public final AtomicLong counter = new AtomicLong();
 
-    //--------------------------------- Get String with PathVariable ---------------------------------
-    @RequestMapping("/query1/{name}")
-    public String sayHello(@PathVariable String name) {
-        return "Hello " + name + template;
+    //--------------------------------- Get String Message ---------------------------------
+    @RequestMapping("/welcomeGreeting")
+    public String displayMessage() {
+        return greetingService.greetingMessage();
     }
 
-    //--------------------------------- Get String with RequestParam ---------------------------------
-    @RequestMapping(value = {"/query2"}, method = RequestMethod.GET)
-    public String sayHelloParam(@RequestParam(value = "name") String name) {
-        return "Hello " + name + template;
+    //--------------------------------- Get count and message ---------------------------------
+    @GetMapping("/greeting")
+    public Greeting greeting(@RequestParam(value = "name", defaultValue = "User") String name) {
+        return new Greeting((int) counter.incrementAndGet(), String.format(template, name));
     }
 }
