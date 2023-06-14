@@ -5,6 +5,7 @@ import com.greetingapplication.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -38,9 +39,16 @@ public class GreetingController {
     public Greeting addGreeting(@RequestBody Greeting greeting) {
         return greetingService.saveGreetings(greeting);
     }
+
     //--------------------------------- Find greeting by Id ---------------------------------
     @GetMapping("/greetingById/{id}")
-    public Greeting getGreetingById(@PathVariable Integer id){
+    public Greeting getGreetingById(@PathVariable Integer id) {
         return greetingService.findGreetingById(id);
+    }
+
+    //--------------------------------- List of greeting ---------------------------------
+    @GetMapping("/allGreetings")
+    public List<Greeting> findAllGreetings() {
+        return greetingService.findGreetings();
     }
 }
