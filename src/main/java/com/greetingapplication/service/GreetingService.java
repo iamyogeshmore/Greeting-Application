@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GreetingService {
     @Autowired
-    GreetingAppRepository repository;
+    private GreetingAppRepository repository;
 
     //--------------------------------- Get String Message ---------------------------------
     public String greetingMessage() {
@@ -30,5 +30,10 @@ public class GreetingService {
     //--------------------------------- Save in repository ---------------------------------
     public Greeting saveGreetings(Greeting greeting) {
         return repository.save(greeting);
+    }
+
+    //--------------------------------- Find greeting by Id ---------------------------------
+    public Greeting findGreetingById(Integer id) {
+        return repository.findById(id).orElse(null);
     }
 }
