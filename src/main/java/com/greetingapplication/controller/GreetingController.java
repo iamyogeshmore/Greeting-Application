@@ -32,4 +32,10 @@ public class GreetingController {
                                        @RequestParam(value = "lastName", defaultValue = "") String lastName) {
         return greetingService.greetingWithUserName(firstName, lastName);
     }
+
+    //--------------------------------- Save in repository ---------------------------------
+    @PostMapping("/addGreeting")
+    public Greeting addGreeting(@RequestBody Greeting greeting) {
+        return greetingService.saveGreetings(greeting);
+    }
 }
