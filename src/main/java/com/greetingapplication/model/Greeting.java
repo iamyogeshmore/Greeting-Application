@@ -28,11 +28,11 @@ public class Greeting {
         this.id = id;
     }
 
-    public String getContent() {
+    public String getMessage() {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setMessage(String message) {
+        this.content = message;
     }
 }
