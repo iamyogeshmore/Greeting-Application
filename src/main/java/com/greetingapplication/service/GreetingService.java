@@ -52,4 +52,10 @@ public class GreetingService {
             return repository.save(existingGreeting);
         } else return null;
     }
+
+    //--------------------------------- Delete greeting ---------------------------------
+    public String deleteGreeting(Integer id) {
+        repository.deleteById(id);
+        return "Data deleted Successfully ";
+    }
 }
