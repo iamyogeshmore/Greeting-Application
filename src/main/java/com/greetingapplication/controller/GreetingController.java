@@ -25,4 +25,11 @@ public class GreetingController {
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "User") String name) {
         return new Greeting((int) counter.incrementAndGet(), String.format(template, name));
     }
+
+    //--------------------------------- Get Greetings By Name ---------------------------------
+    @GetMapping("/greetingsByName")
+    public String greetingWithUserName(@RequestParam(value = "firstName", defaultValue = "") String firstName,
+                                       @RequestParam(value = "lastName", defaultValue = "") String lastName) {
+        return greetingService.greetingWithUserName(firstName, lastName);
+    }
 }
